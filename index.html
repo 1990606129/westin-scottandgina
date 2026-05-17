@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study &mdash;Westin Kierland x Scott & Gina</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5F0EB;
+    --cream-dark: #EDE6DD;
+    --gold: #C5A55A;
+    --gold-light: #D4B96E;
+    --dark: #1A1A1A;
+    --dark-mid: #2A2A2A;
+    --text-dark: #333333;
+    --text-mid: #666666;
+    --text-light: #999999;
+    --white: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* -- NAV -- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    text-decoration: none;
+  }
+  .nav-logo em {
+    color: var(--gold);
+    font-style: normal;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-right {
+    font-size: 12px;
+    color: var(--text-light);
+    letter-spacing: 1px;
+  }
+
+  /* -- PHOTO GALLERY -- */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+  .photo-grid.two-col {
+    grid-template-columns: 1.4fr 1fr;
+  }
+  .photo-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-caption {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(0,0,0,0.5);
+    padding: 6px 14px;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+  }
+  .photo-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-wrap img {
+    transition: transform 0.4s;
+  }
+  .photo-wrap:hover img {
+    transform: scale(1.03);
+  }
+
+  /* -- HERO -- */
+  .hero {
+    position: relative;
+    height: 85vh;
+    min-height: 600px;
+    background: url('https://cache.marriott.com/is/image/marriotts7prod/wi-phxws-aerial-resort-view-30083:Wide-Hor') center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 40px;
+  }
+  .hero-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    color: var(--gold-light);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 28px auto;
+  }
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* -- STAT BAR -- */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    background: var(--white);
+  }
+  .stat-item {
+    padding: 40px 20px;
+    text-align: center;
+    border-right: 1px solid rgba(0,0,0,0.06);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  /* -- SECTIONS -- */
+  section {
+    padding: 100px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-number {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-number::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-headline em {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  /* -- OVERVIEW -- */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .overview-text p {
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .overview-quote {
+    border-left: 3px solid var(--gold);
+    padding-left: 24px;
+    margin: 36px 0;
+  }
+  .overview-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  .overview-details {
+    background: var(--cream-dark);
+    border-radius: 12px;
+    padding: 48px;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .detail-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-align: right;
+  }
+
+  /* -- DELIVERABLES -- */
+  .dark-section {
+    background: var(--dark);
+    padding: 100px 60px;
+    margin: 0;
+    max-width: 100%;
+  }
+  .dark-section .section-number { color: var(--gold-light); }
+  .dark-section .section-number::before { background: var(--gold-light); }
+  .dark-section .section-headline { color: var(--white); }
+  .dark-section .section-headline em { color: var(--gold-light); }
+
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .deliverable-card {
+    background: var(--dark-mid);
+    border-radius: 12px;
+    padding: 40px 32px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .deliverable-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(197,165,90,0.3);
+  }
+  .deliverable-icon {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .deliverable-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .deliverable-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+  }
+  .deliverable-tag {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 14px;
+    border: 1px solid rgba(197,165,90,0.4);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  /* -- PERFORMANCE -- */
+  .perf-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .perf-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 36px 28px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .perf-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .perf-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .perf-sublabel {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* -- HIGHLIGHT BAR -- */
+  .highlight-bar {
+    background: var(--gold);
+    padding: 48px 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 100%;
+    margin: 0;
+  }
+  .highlight-item {
+    text-align: center;
+  }
+  .highlight-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .highlight-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* -- EXPERIENCE -- */
+  .experience-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 48px;
+  }
+  .exp-item {
+    padding: 40px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .exp-category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .exp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .exp-desc {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* -- TAGS -- */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .tag {
+    padding: 8px 18px;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+
+  /* -- CTA / FOOTER -- */
+  .cta-section {
+    background: var(--dark);
+    padding: 100px 60px;
+    text-align: center;
+    max-width: 100%;
+    margin: 0;
+  }
+  .cta-section .section-headline {
+    color: var(--white);
+    max-width: 600px;
+    margin: 0 auto 16px;
+  }
+  .cta-section .section-headline em { color: var(--gold-light); }
+  .cta-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    max-width: 500px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+  .cta-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .cta-link {
+    display: inline-block;
+    padding: 14px 36px;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .cta-link:hover {
+    background: var(--gold);
+    color: var(--white);
+  }
+  .cta-link.primary {
+    background: var(--gold);
+    color: var(--white);
+  }
+  .cta-link.primary:hover {
+    background: var(--gold-light);
+  }
+
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 60px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  /* -- RESPONSIVE -- */
+  @media (max-width: 900px) {
+    .hero h1 { font-size: 44px; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .overview-grid { grid-template-columns: 1fr; gap: 40px; }
+    .deliverables-grid { grid-template-columns: 1fr; }
+    .perf-grid { grid-template-columns: repeat(2, 1fr); }
+    .highlight-bar { grid-template-columns: 1fr; }
+    .experience-items { grid-template-columns: 1fr; }
+    section { padding: 60px 24px; }
+    .dark-section, .cta-section { padding: 60px 24px; }
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://mediakit.scottandgina.life/">Scott <em>&</em> Gina</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#deliverables">Deliverables</a></li>
+    <li><a href="#performance">Performance</a></li>
+    <li><a href="#experience">Experience</a></li>
+  </ul>
+  <span class="nav-right">CASE STUDY &middot; 2023</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-label">Case Study &middot; Resort Partnership</div>
+    <h1>Westin Kierland<br><em>Resort & Spa</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">A luxury resort collaboration in Scottsdale featuring a private scotch tasting experience with Glenmorangie at one of Arizona's premier desert destinations.</p>
+  </div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">8.4K</div>
+    <div class="stat-label">Likes</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">110</div>
+    <div class="stat-label">Comments</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">5</div>
+    <div class="stat-label">Saves</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">8.5K+</div>
+    <div class="stat-label">Total Engagements</div>
+  </div>
+</div>
+
+<!-- PHOTO GALLERY &mdash;THE PROPERTY -->
+<div class="photo-grid two-col" style="max-height: 500px; overflow: hidden;">
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/is/image/marriotts7prod/wi-phxws-scotch-library-wide-28014:Wide-Hor" alt="The Scotch Library at Westin Kierland">
+    <span class="photo-caption">The Scotch Library</span>
+  </div>
+  <div style="display: grid; grid-template-rows: 1fr 1fr; gap: 4px;">
+    <div class="photo-wrap">
+      <img src="https://cache.marriott.com/content/dam/marriott-renditions/PHXWS/phxws-king-guestroom-6993-hor-wide.jpg" alt="King Guest Room" style="height: 248px; object-fit: cover;">
+      <span class="photo-caption">King Guest Room</span>
+    </div>
+    <div class="photo-wrap">
+      <img src="https://cache.marriott.com/content/dam/marriott-renditions/PHXWS/phxws-lobby-2506-hor-wide.jpg" alt="Resort Lobby" style="height: 248px; object-fit: cover;">
+      <span class="photo-caption">Grand Lobby</span>
+    </div>
+  </div>
+</div>
+
+<!-- INSTAGRAM POST EMBED &mdash;HIGH PLACEMENT -->
+<section style="text-align: center; padding: 80px 60px;">
+  <div class="section-headline" style="margin-bottom: 12px;">See the <em>post.</em></div>
+  <p style="font-size: 14px; color: var(--text-light); margin-bottom: 36px;">The scotch tasting experience in action.</p>
+  <div style="display: flex; justify-content: center;">
+    <a href="https://www.instagram.com/p/CsWa1kPsBck/" target="_blank" rel="noopener" style="display:block; max-width:540px; width:100%; padding:48px 36px; background:#fff; border:1px solid #e0e0e0; border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.06); text-decoration:none; transition: box-shadow 0.3s ease, transform 0.2s ease;">
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C13584" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <span style="font-family:'Playfair Display',serif; font-size:20px; color:#1a1a1a;">@scottandgina</span>
+      </div>
+      <div style="font-size:14px; color:#666; margin-bottom:20px;">Westin Kierland Scotch Tasting Experience</div>
+      <div style="display:inline-block; padding:12px 32px; background:linear-gradient(135deg, #833AB4, #C13584, #E1306C, #F77737); color:#fff; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; border-radius:6px;">View on Instagram &nearr;</div>
+    </a>
+  </div>
+  <div style="margin-top: 36px;">
+    <a href="https://mediakit.scottandgina.life/" style="display:inline-block; padding:14px 36px; background:var(--gold); color:var(--white); font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; border-radius:4px;">View Full Media Kit</a>
+  </div>
+</section>
+
+<!-- 01 &mdash;OVERVIEW -->
+<section id="overview">
+  <div class="section-number">01 &mdash; Overview</div>
+  <div class="overview-grid">
+    <div class="overview-text">
+      <div class="section-headline">Scotch, sun,<br><em>& storytelling.</em></div>
+      <p>Scott and Gina were invited to The Westin Kierland Resort & Spa in Scottsdale, Arizona for an exclusive scotch tasting experience in partnership with Glenmorangie. The collaboration showcased the resort's renowned Scotch Library &mdash;one of the most impressive whiskey collections in the Southwest &mdash;alongside curated food pairings and expert-led tasting sessions.</p>
+      <p>The content captured the unique intersection of luxury resort living and world-class spirits education, positioning the Westin Kierland as a destination for elevated, experience-driven travel. The scotch tasting angle gave audiences a fresh reason to visit beyond the typical pool-and-golf narrative.</p>
+      <div class="overview-quote">
+        <p>"It felt like a really delicious history class in university. Highly recommend booking this experience &mdash;the scotch library is incredible."</p>
+      </div>
+      <div class="tags">
+        <span class="tag">Luxury Resort</span>
+        <span class="tag">Scotch Tasting</span>
+        <span class="tag">Glenmorangie</span>
+        <span class="tag">Scottsdale</span>
+        <span class="tag">Food Pairing</span>
+        <span class="tag">Desert Retreat</span>
+      </div>
+    </div>
+    <div class="overview-details">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 32px; color: var(--dark);">Partnership Details</h3>
+      <div class="detail-row">
+        <span class="detail-label">Partner</span>
+        <span class="detail-value">The Westin Kierland Resort & Spa</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Location</span>
+        <span class="detail-value">Scottsdale, Arizona</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Experience</span>
+        <span class="detail-value">Private Scotch Tasting</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Brand Partner</span>
+        <span class="detail-value">Glenmorangie</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Property Type</span>
+        <span class="detail-value">4-Star Golf Resort & Spa</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Content Date</span>
+        <span class="detail-value">May 2023</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Platforms</span>
+        <span class="detail-value">Instagram Carousel, Stories</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Post Link</span>
+        <span class="detail-value"><a href="https://www.instagram.com/p/CsWa1kPsBck/" style="color: var(--gold); text-decoration: none;">View Post &nearr;</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 &mdash;DELIVERABLES -->
+<div class="dark-section" id="deliverables">
+  <div style="max-width: 1400px; margin: 0 auto;">
+    <div class="section-number">02 &mdash; Deliverables</div>
+    <div class="section-headline" style="margin-bottom: 48px;">What we<br><em>delivered.</em></div>
+    <div class="deliverables-grid">
+      <div class="deliverable-card">
+        <div class="deliverable-icon">📸</div>
+        <div class="deliverable-title">Instagram Carousel</div>
+        <div class="deliverable-desc">Multi-image carousel post documenting the scotch tasting experience &mdash;from the library setting and whiskey collection to the food pairings and expert-led tasting session.</div>
+        <div class="deliverable-tag">8.4K Likes</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">📱</div>
+        <div class="deliverable-title">Instagram Stories</div>
+        <div class="deliverable-desc">Real-time story coverage across @ginatash documenting the full resort experience &mdash;scotch library walkthrough, tasting reactions, food pairing highlights, and resort amenities.</div>
+        <div class="deliverable-tag">Multi-Slide</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">🥃</div>
+        <div class="deliverable-title">Scotch Library Feature</div>
+        <div class="deliverable-desc">Dedicated coverage of the Westin Kierland's renowned Scotch Library &mdash;highlighting the curated collection and positioning it as a must-visit experience for spirits enthusiasts.</div>
+        <div class="deliverable-tag">Glenmorangie</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">🍽️</div>
+        <div class="deliverable-title">Food Pairing Content</div>
+        <div class="deliverable-desc">Showcased the curated food pairings alongside each scotch selection &mdash;elevating the experience from a simple tasting to a full culinary journey.</div>
+        <div class="deliverable-tag">Culinary</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">🏜️</div>
+        <div class="deliverable-title">Resort & Destination</div>
+        <div class="deliverable-desc">Broader resort coverage highlighting the Westin Kierland's pools, golf course, Agave Spa, and desert landscape &mdash;giving followers the full picture of the Scottsdale destination.</div>
+        <div class="deliverable-tag">Lifestyle</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-icon">🏷️</div>
+        <div class="deliverable-title">Brand Tags & Mentions</div>
+        <div class="deliverable-desc">Direct @westinkierland and @glenmorangie tags on carousel and stories &mdash;driving traffic to both the resort and spirits brand profiles simultaneously.</div>
+        <div class="deliverable-tag">Dual Brand</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HIGHLIGHT BAR -->
+<div class="highlight-bar">
+  <div class="highlight-item">
+    <div class="highlight-number">8.4K</div>
+    <div class="highlight-label">Likes on Carousel Post</div>
+  </div>
+  <div class="highlight-item">
+    <div class="highlight-number">110</div>
+    <div class="highlight-label">Comments & Conversations</div>
+  </div>
+  <div class="highlight-item">
+    <div class="highlight-number">2</div>
+    <div class="highlight-label">Brands Featured</div>
+  </div>
+</div>
+
+<!-- 03 &mdash;PERFORMANCE -->
+<section id="performance">
+  <div class="section-number">03 &mdash; Performance</div>
+  <div class="section-headline">Results that<br><em>speak.</em></div>
+  <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; max-width: 600px; margin-bottom: 12px;">The carousel post drove strong engagement with over 8,400 likes and 110 comments &mdash;with audiences actively asking how to book the scotch tasting experience and requesting more resort content.</p>
+  <p style="font-size: 14px; color: var(--text-light); margin-bottom: 0;"><em>Metrics as of latest available data.</em></p>
+
+  <div class="perf-grid">
+    <div class="perf-card">
+      <div class="perf-number">8,400+</div>
+      <div class="perf-label">Likes</div>
+      <div class="perf-sublabel">Strong engagement signal</div>
+    </div>
+    <div class="perf-card">
+      <div class="perf-number">110</div>
+      <div class="perf-label">Comments</div>
+      <div class="perf-sublabel">High conversation rate</div>
+    </div>
+    <div class="perf-card">
+      <div class="perf-number">5</div>
+      <div class="perf-label">Saves</div>
+      <div class="perf-sublabel">Booking intent</div>
+    </div>
+    <div class="perf-card">
+      <div class="perf-number">8.5K+</div>
+      <div class="perf-label">Total Engagements</div>
+    </div>
+    <div class="perf-card">
+      <div class="perf-number">3</div>
+      <div class="perf-label">Accounts Tagged</div>
+      <div class="perf-sublabel">Collaborative post</div>
+    </div>
+    <div class="perf-card">
+      <div class="perf-number">Multi</div>
+      <div class="perf-label">Carousel Slides</div>
+      <div class="perf-sublabel">Full experience coverage</div>
+    </div>
+    <div class="perf-card">
+      <div class="perf-number">2</div>
+      <div class="perf-label">Brand Partners</div>
+      <div class="perf-sublabel">Westin + Glenmorangie</div>
+    </div>
+    <div class="perf-card">
+      <div class="perf-number">156</div>
+      <div class="perf-label">Weeks Live</div>
+      <div class="perf-sublabel">Evergreen content</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTY GALLERY -->
+<div class="photo-grid" style="max-height: 360px; overflow: hidden;">
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/is/image/marriotts7prod/wi-phxws-resort-pool-42184:Wide-Hor" alt="Resort Pool" style="height: 360px; object-fit: cover;">
+    <span class="photo-caption">Resort Pool</span>
+  </div>
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/is/image/marriotts7prod/wi-phxws-faro-brag-42501:Wide-Hor" alt="Faro & Brag Dining" style="height: 360px; object-fit: cover;">
+    <span class="photo-caption">Faro & Brag</span>
+  </div>
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/content/dam/marriott-renditions/PHXWS/phxws-spa-7127-hor-wide.jpg" alt="Agave, The Arizona Spa" style="height: 360px; object-fit: cover;">
+    <span class="photo-caption">Agave Spa</span>
+  </div>
+</div>
+
+<!-- 04 &mdash;EXPERIENCE -->
+<section id="experience">
+  <div class="section-number">04 &mdash; The Experience</div>
+  <div class="section-headline">Everything<br><em>provided.</em></div>
+  <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; max-width: 600px; margin-bottom: 0;">A breakdown of the full hosted experience &mdash;from the private scotch tasting to the resort amenities &mdash;that made this collaboration unique.</p>
+
+  <div class="experience-items">
+    <div class="exp-item">
+      <div class="exp-category">Signature Experience</div>
+      <div class="exp-title">Private Scotch Tasting</div>
+      <div class="exp-desc">An exclusive, guided tasting session in the Westin Kierland's celebrated Scotch Library &mdash;featuring a curated selection of Glenmorangie expressions paired with complementary food courses. Led by a dedicated scotch guide who walked through the history, distillation process, and tasting notes of each pour.</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-category">Culinary</div>
+      <div class="exp-title">Curated Food Pairings</div>
+      <div class="exp-desc">Expert-selected food pairings designed to complement each scotch expression &mdash;elevating the tasting from a simple spirits experience to a multi-sensory culinary journey. Each course was crafted to highlight different flavor profiles in the whiskey.</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-category">Resort</div>
+      <div class="exp-title">Full Resort Access</div>
+      <div class="exp-desc">Access to the Westin Kierland's 732-acre resort grounds &mdash;including the Adventure Water Park with 110-foot waterslide, Kierland Golf Club, pool cabanas, and the award-winning Agave, The Arizona Spa. A full desert luxury experience beyond the tasting.</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-category">Location</div>
+      <div class="exp-title">Scottsdale, Arizona</div>
+      <div class="exp-desc">Set against the dramatic backdrop of the Sonoran Desert in Scottsdale &mdash;one of America's top luxury travel destinations. The desert landscape provided stunning visual content and positioned the experience within a broader aspirational travel narrative.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL PHOTO STRIP -->
+<div class="photo-grid" style="grid-template-columns: repeat(4, 1fr); max-height: 280px; overflow: hidden;">
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/content/dam/marriott-renditions/PHXWS/phxws-scotch-library-3392-hor-wide.jpg" alt="Scotch Collection" style="height: 280px; object-fit: cover;">
+  </div>
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/content/dam/marriott-renditions/PHXWS/phxws-parlor-suite-6019-hor-wide.jpg" alt="Presidential Suite" style="height: 280px; object-fit: cover;">
+  </div>
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/is/image/marriotts7prod/wi-phxws-poolside-cabanas-41589:Wide-Hor" alt="Pool Cabanas" style="height: 280px; object-fit: cover;">
+  </div>
+  <div class="photo-wrap">
+    <img src="https://cache.marriott.com/is/image/marriotts7prod/wi-phxws-patio-views-31333:Wide-Hor" alt="Firepit Patio" style="height: 280px; object-fit: cover;">
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="section-headline">Let's create<br><em>something together.</em></div>
+  <p class="cta-sub">Interested in a similar partnership? We'd love to bring this level of storytelling and reach to your property.</p>
+  <div class="cta-links">
+    <a href="https://mediakit.scottandgina.life/" class="cta-link primary">View Full Media Kit</a>
+    <a href="mailto:scott@scottdclary.com" class="cta-link">Get In Touch</a>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 SCOTT & GINA &middot; SCOTTANDGINA.LIFE
+</footer>
+
+</body>
+</html>
+Claude is active in this tab group
+Open chat
+Dismiss
